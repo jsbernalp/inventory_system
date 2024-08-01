@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../models/User';
 import { Category } from '../models/Category';
+import { Product } from '../models/Product';
 
 // Cargar variables de entorno desde el archivo .env
 import * as dotenv from 'dotenv';
@@ -13,7 +14,7 @@ const dataSource = new DataSource({
     username: process.env.DB_USERNAME || 'root',
     password: process.env.DB_PASSWORD || '12345678j',
     database: process.env.DB_NAME || 'inventory_system',
-    entities: [User, Category],
+    entities: [User, Category,Product],
     synchronize: true,
     logging: false,
 });
