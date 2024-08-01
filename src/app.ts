@@ -12,7 +12,7 @@ app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 
-const PORT = process.env.PORT || 33010;
+const PORT = process.env.PORT;
 
 dataSource.initialize()
   .then(() => {
