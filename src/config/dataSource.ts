@@ -17,6 +17,7 @@ const dataSource = new DataSource({
     entities: [User, Category,Product],
     synchronize: true,
     logging: false,
+    driver: 'mysql2',
 });
 
 export default dataSource;
