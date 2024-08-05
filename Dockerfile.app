@@ -26,5 +26,9 @@ RUN chmod +x wait-for-it.sh
 # Expone el puerto en el que la aplicación estará corriendo
 EXPOSE 3000
 
+FROM mysql:8.0
+
+RUN apt-get update && apt-get install -y gettext-base
+
 # Comando para iniciar la aplicación
 CMD ["./wait-for-it.sh", "${DB_HOST}:${DB_PORT}", "--", "npm", "run", "start"]

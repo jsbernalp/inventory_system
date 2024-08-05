@@ -1,0 +1,16 @@
+FROM ubuntu:20.04
+
+# Instalar MySQL y gettext
+RUN apt-get update && \
+    apt-get install -y mysql-server gettext-base && \
+    rm -rf /var/lib/apt/lists/*
+    
+
+# Copiar los scripts de inicialización
+COPY init.sql /docker-entrypoint-initdb.d/
+COPY init-db.sh /docker-entrypoint-initdb.d/
+
+# Configuración adicional y comando para iniciar MySQL
+CMD ["mysqld"]
+# Usamos el script init-db.sh como punto de entrada
+ENTRYPOINT ["/docker-entrypoint-initdb.d/init-db.sh"]
