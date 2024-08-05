@@ -5,3 +5,4 @@ envsubst < /docker-entrypoint-initdb.d/init.sql > /docker-entrypoint-initdb.d/in
 
 # Ejecuta el comando de inicialización original
 /docker-entrypoint.sh mysqld
+
