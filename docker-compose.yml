@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:8.0
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     container_name: inventory-system-db
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -11,14 +13,13 @@ services:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
       - db_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - inventory-network
 
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.app
     depends_on:
       - db
     container_name: inventory-system-app
