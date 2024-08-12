@@ -13,8 +13,8 @@ export const createCategory = async (userData: Partial<Category>) => {
       throw new HttpError(400, `La categoría "${upperCaseName}" ya existe.`);
     }
 
-    const user = categoryRepository.create(userData);
-    return await categoryRepository.save(user);
+    const newCategory = categoryRepository.create({ categoryName: upperCaseName });
+    await categoryRepository.save(newCategory);
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     throw new Error(`Error creating category: ${errorMessage}`);
