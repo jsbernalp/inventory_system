@@ -5,6 +5,13 @@ const categoryRepository = dataSource.getRepository(Category);
 
 export const createCategory = async (userData: Partial<Category>) => {
   try {
+    const upperCaseName = userData.categoryName?.toUpperCase();
+    const existingCategory = await categoryRepository.findOne({ where: { categoryName: upperCaseName } });
+
+    if (existingCategory) {
+      throw new Error(`La categoría "${upperCaseName}" ya existe.`);
+    }
+
     const user = categoryRepository.create(userData);
     return await categoryRepository.save(user);
   } catch (error) {
