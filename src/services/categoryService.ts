@@ -1,5 +1,6 @@
 import { Category } from '../models/Category';
 import dataSource from '../config/dataSource';
+import { HttpError } from '../utils/HttpError';
 
 const categoryRepository = dataSource.getRepository(Category);
 
@@ -9,7 +10,7 @@ export const createCategory = async (userData: Partial<Category>) => {
     const existingCategory = await categoryRepository.findOne({ where: { categoryName: upperCaseName } });
 
     if (existingCategory) {
-      throw new Error(`La categoría "${upperCaseName}" ya existe.`);
+      throw new HttpError(400, `La categoría "${upperCaseName}" ya existe.`);
     }
 
     const user = categoryRepository.create(userData);
